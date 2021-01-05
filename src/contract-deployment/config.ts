@@ -44,6 +44,7 @@ export interface RollupDeployConfig {
 export interface ContractDeployParameters {
   factory: ContractFactory
   params?: any[]
+  deployOverrides?: Overrides
   afterDeploy?: (contracts?: { [name: string]: Contract }) => Promise<void>
 }
 
@@ -141,6 +142,7 @@ export const makeContractDeployConfig = async (
         config.ovmGasMeteringConfig,
         config.ovmGlobalContext,
       ],
+      deployOverrides: { gasLimit: 5000000, },
     },
     OVM_StateManager: {
       factory: getContractFactory('OVM_StateManager'),
